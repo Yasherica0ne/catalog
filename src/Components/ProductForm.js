@@ -50,10 +50,6 @@ class ProductForm extends React.Component {
             })
         }
         this.onProductAddButtonClick = () => {
-            if (!this.state.product.productName) {
-                alert('You should enter product name!');
-                return null;
-            }
             if (this.state.product.id === -1) {
                 const product = this.state.product;
                 const productsCount = this.state.productsCounter;
@@ -104,7 +100,7 @@ class ProductForm extends React.Component {
                         attributes={attributes} />
                     <br />
 
-                    <button onClick={this.onProductAddButtonClick}>Save</button>
+                    <button disabled={this.state.product.productName === '' ? true : false} onClick={this.onProductAddButtonClick}>Save</button>
                 </React.Fragment>
             );
         }

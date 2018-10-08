@@ -1,4 +1,5 @@
 import React from "react";
+import CategoryView from "./CategoryView";
 
 function GetEmptyCategory() {
     return {
@@ -17,7 +18,7 @@ class CategoryForm extends React.Component {
             categoryAttribute: '',
             categoryAttributeValue: '',
             categoriesCounter: this.props.categoriesCount,
-            isAttributeSaved: false
+            isAttributeSaved: true
         };
         this.onCategoryNameChange = (e) => {
             const category = this.state.category;
@@ -43,8 +44,8 @@ class CategoryForm extends React.Component {
             const attribute = this.state.categoryAttribute;
             this.state.category.categoryAttributes.set(attribute, []);
             this.setState({
-                isAttributeSaved: true
-            })
+                isAttributeSaved: false
+            });
         }
         this.onAttributeValueAddButtonClick = () => {
             const attribute = this.state.categoryAttribute;
@@ -57,18 +58,13 @@ class CategoryForm extends React.Component {
         }
         this.onAttributeSaved = () => {
             this.setState({
-                isAttributeSaved: false,
+                isAttributeSaved: true,
                 categoryAttribute: '',
                 categoryAttributeValue: ''
             })
         }
         this.onAddCategorySaveButtonClick = () => {
             const category = this.state.category;
-            if(!category.categoryName)
-            {
-                alert("You shold enter category name!");
-                return null;
-            }
             const categoriesCount = this.state.categoriesCounter;
             category.id = categoriesCount;
             const AddCategory = this.props.addCategory;
@@ -78,7 +74,7 @@ class CategoryForm extends React.Component {
                 category: GetEmptyCategory(),
                 categoryAttribute: '',
                 categoryAttributeValue: '',
-                isAttributeSaved: false
+                isAttributeSaved: true
             })
         }
     }
@@ -91,17 +87,17 @@ class CategoryForm extends React.Component {
                 <br />
 
                 <input value={this.state.categoryAttribute} onChange={this.onAttributeChange} placeholder={'Attribute name'} />
-                <button disabled={this.state.isAttributeSaved} onClick={this.onAttributeAddButtonClick}>Add attribute</button>
+                <button disabled={!this.state.isAttributeSaved} onClick={this.onAttributeAddButtonClick}>Add attribute</button>
                 <br />
 
                 <input value={this.state.categoryAttributeValue} onChange={this.onAttributeValueChange} placeholder={'Attribute value'} />
-                <button disabled={!this.state.isAttributeSaved} onClick={this.onAttributeValueAddButtonClick}>Add value</button>
+                <button disabled={this.state.isAttributeSaved} onClick={this.onAttributeValueAddButtonClick}>Add value</button>
                 <br />
 
-                <button disabled={!this.state.isAttributeSaved} onClick={this.onAttributeSaved}>Save attribute</button>
+                <button disabled={this.state.isAttributeSaved} onClick={this.onAttributeSaved}>Save attribute</button>
                 <br />
-
-                <button style={{ marginTop: '2vh' }} onClick={this.onAddCategorySaveButtonClick}>Save category</button>
+                <button disabled={this.state.category.categoryName === '' ? true : false} style={{ marginTop: '2vh' }} onClick={this.onAddCategorySaveButtonClick}>Save category</button>
+                <CategoryView category={this.state.category} />
             </React.Fragment>
         );
     }
