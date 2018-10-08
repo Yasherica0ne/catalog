@@ -5,11 +5,12 @@ class ProductList extends React.Component {
         const products = this.props.products;
         let productNames = [];
         for (let product of products) {
-            productNames.push(<div key={productNames.length} style={{cursor: 'pointer'}}
+            productNames.push(<div key={product.id} style={{cursor: 'pointer'}}
                                    onClick={this.props.productSelect}>{product.productName}</div>);
         }
         return (
             <React.Fragment>
+            <h3>Products</h3>
                 {productNames}
             </React.Fragment>
         );

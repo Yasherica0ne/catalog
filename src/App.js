@@ -88,7 +88,7 @@ class App extends React.Component {
         return (
             <React.Fragment>
 
-                <div style={{position: 'absolute'}}>
+                <div style={{marginLeft: '1vw', position: 'absolute'}}>
                     <CategoryForm categoriesCount={this.state.categories.length} addCategory={this.CategoryAdd}/>
                 </div>
 

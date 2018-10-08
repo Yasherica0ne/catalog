@@ -50,9 +50,8 @@ class ProductForm extends React.Component {
             })
         }
         this.onProductAddButtonClick = () => {
-            if(!this.state.product.productName)
-            {
-                alert('Enter product name!');
+            if (!this.state.product.productName) {
+                alert('You should enter product name!');
                 return null;
             }
             if (this.state.product.id === -1) {
@@ -66,7 +65,7 @@ class ProductForm extends React.Component {
                     product: this.GetEmptyProduct()
                 })
             }
-            else{
+            else {
                 let ProductChange = this.props.onProductChange;
                 this.setState({
                     product: this.GetEmptyProduct()
@@ -92,17 +91,18 @@ class ProductForm extends React.Component {
             }
             return (
                 <React.Fragment>
+                    <h3>Add product form</h3>
                     <input value={this.state.product.productName} onChange={this.onProductNameChange}
-                           placeholder={'Product name'}/>
-                    <br/>
+                        placeholder={'Product name'} />
+                    <br />
 
                     <Selector placeholder={'Choose category'} selectedValue={this.state.product.category} changeIvent={this.onCategoryChange}
-                              optionValues={categoryNames}/>
-                    <br/>
+                        optionValues={categoryNames} />
+                    <br />
 
                     <Selectors selectedValues={this.state.product.categoryAttributes} onAdd={this.onAttributeValueAdd}
-                               attributes={attributes}/>
-                    <br/>
+                        attributes={attributes} />
+                    <br />
 
                     <button onClick={this.onProductAddButtonClick}>Save</button>
                 </React.Fragment>
